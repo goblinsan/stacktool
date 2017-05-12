@@ -1,0 +1,14 @@
+version: '2'
+services:
+    stacktool-app:
+        image: stacktool
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mariadb://stacktool-mariadb:3306/stacktool
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    stacktool-mariadb:
+        extends:
+            file: mariadb.yml
+            service: stacktool-mariadb
