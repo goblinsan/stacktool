@@ -39,16 +39,16 @@ public class StackCalcsTest {
     public void createGetProbeMarkings() {
         List expectedList = Arrays.asList(14.6, 85.4);
 
-        assertTrue(expectedList.equals(testObj.getProbeMarks(100d, 0, 4)));
+        assertTrue(expectedList.equals(testObj.getProbeMarks(100d, 0d, 4)));
 
         expectedList = Arrays.asList(6.7/2+4, 25.0/2+4, 75.0/2+4, 93.3/2+4);
 
-        assertTrue(expectedList.equals(testObj.getProbeMarks(50d, 4, 8)));
+        assertTrue(expectedList.equals(testObj.getProbeMarks(50d, 4d, 8)));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void errorProbeMarking()  {
-        testObj.getProbeMarks(100d,0,1);
+        testObj.getProbeMarks(100d,0d,1);
     }
 
     @Test

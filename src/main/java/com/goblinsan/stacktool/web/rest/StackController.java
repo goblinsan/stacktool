@@ -13,20 +13,19 @@ public class StackController {
     @RequestMapping("/pointCalcs")
     public ResponseEntity getTraversePoints(@RequestBody TraverseInputs traverseInputs){
         StackCalcs stackCalcs =  new StackCalcs();
-        System.out.println(traverseInputs);
         return ResponseEntity.ok(stackCalcs.getProbeMarks(traverseInputs.stackDiameter,traverseInputs.portDepth, traverseInputs.numberOfPoints));
     }
 
     private static class TraverseInputs {
         private Double stackDiameter;
-        private int portDepth;
+        private Double portDepth;
         private int numberOfPoints;
 
         public void setStackDiameter(Double stackDiameter) {
             this.stackDiameter = stackDiameter;
         }
 
-        public void setPortDepth(int portDepth) {
+        public void setPortDepth(Double portDepth) {
             this.portDepth = portDepth;
         }
 
