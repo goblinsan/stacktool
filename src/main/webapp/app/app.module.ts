@@ -1,33 +1,26 @@
 import './vendor.ts';
 
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Ng2Webstorage } from 'ng2-webstorage';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {Ng2Webstorage} from 'ng2-webstorage';
+import {HttpModule} from '@angular/http';
 
-import { StacktoolSharedModule, UserRouteAccessService } from './shared';
-import { StacktoolHomeModule } from './home/home.module';
-import { StacktoolAdminModule } from './admin/admin.module';
-import { StacktoolAccountModule } from './account/account.module';
-import { StacktoolEntityModule } from './entities/entity.module';
+import {StacktoolSharedModule, UserRouteAccessService} from './shared';
+import {StacktoolHomeModule} from './home/home.module';
+import {StacktoolAdminModule} from './admin/admin.module';
+import {StacktoolAccountModule} from './account/account.module';
+import {StacktoolEntityModule} from './entities/entity.module';
 
-import { customHttpProvider } from './blocks/interceptor/http.provider';
-import { PaginationConfig } from './blocks/config/uib-pagination.config';
+import {customHttpProvider} from './blocks/interceptor/http.provider';
+import {PaginationConfig} from './blocks/config/uib-pagination.config';
 
-import {
-    JhiMainComponent,
-    LayoutRoutingModule,
-    NavbarComponent,
-    FooterComponent,
-    ProfileService,
-    PageRibbonComponent,
-    ActiveMenuDirective,
-    ErrorComponent
-} from './layouts';
+import {ActiveMenuDirective, ErrorComponent, FooterComponent, JhiMainComponent, LayoutRoutingModule, NavbarComponent, PageRibbonComponent, ProfileService} from './layouts';
 
 @NgModule({
     imports: [
         BrowserModule,
         LayoutRoutingModule,
+        HttpModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         StacktoolSharedModule,
         StacktoolHomeModule,

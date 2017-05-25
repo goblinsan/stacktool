@@ -1,10 +1,9 @@
 package com.goblinsan.stacktool.config;
 
-import com.goblinsan.stacktool.security.*;
-import com.goblinsan.stacktool.security.jwt.*;
-
-import io.github.jhipster.security.*;
-
+import com.goblinsan.stacktool.security.AuthoritiesConstants;
+import com.goblinsan.stacktool.security.jwt.JWTConfigurer;
+import com.goblinsan.stacktool.security.jwt.TokenProvider;
+import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -79,7 +78,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/content/**")
             .antMatchers("/swagger-ui/index.html")
             .antMatchers("/test/**")
-            .antMatchers("/h2-console/**");
+            .antMatchers("/h2-console/**")
+            .antMatchers("/api/pointCalcs");
     }
 
     @Override
