@@ -1,56 +1,57 @@
 {
-    "project": {
-        "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-        "name": "stacktool"
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "stacktool"
+  },
+  "apps": [
+    {
+      "root": "src/main/webapp",
+      "outDir": "src/main/resources/static",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "app/index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/main/webapp/tsconfig.app.json"
     },
-    "apps": [{
-        "root": "src/main/webapp/",
-        "outDir": "target/www/app",
-        "assets": [
-            "content",
-            "i18n",
-            "favicon.ico"
-        ],
-        "index": "index.html",
-        "main": "app/app.main.ts",
-        "polyfills": "app/polyfills.ts",
-        "test": "",
-        "tsconfig": "../../../tsconfig.json",
-        "prefix": "jhi",
-        "mobile": false,
-        "styles": [
-            "content/scss/vendor.scss",
-            "content/scss/global.scss"
-        ],
-        "scripts": []
-    }],
-    "addons": [],
-    "packages": [],
-    "lint": [{
-            "project": "../../../tsconfig.json"
-        },
-        {
-            "project": "../../../tsconfig-aot.json"
-        }
-    ],
-    "test": {
-        "karma": {
-            "config": "src/test/javascript/karma.conf.js"
-        }
+    {
+      "project": "src/test/javascript/tsconfig.spec.json"
     },
-    "defaults": {
-        "styleExt": "scss",
-        "prefixInterfaces": false,
-        "inline": {
-            "style": true,
-            "template": false
-        },
-        "spec": {
-            "component": false,
-            "directive": false,
-            "pipe": false,
-            "service": false
-        }
-    },
-    "packageManager": "yarn"
+    {
+      "project": "src/test/javascript/e2e/tsconfig.e2e.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
 }

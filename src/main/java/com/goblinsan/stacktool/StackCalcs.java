@@ -1,7 +1,7 @@
 package com.goblinsan.stacktool;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
+import java.text.NumberFormat;
 import java.util.*;
 
 public class StackCalcs {
@@ -24,13 +24,13 @@ public class StackCalcs {
         pointPercents.put(24, Arrays.asList(1.1, 3.2, 5.5, 7.9, 10.5, 13.2, 16.1, 19.4, 19.4, 27.2, 32.3, 39.8, 60.2, 67.7, 72.8, 77.0, 80.6, 83.9, 86.8, 89.5, 92.1, 94.5, 96.8, 98.9));
     }
 
-    public List<Double> getProbeMarks(Double stackDiameter, Double portDepth, int numPoints) throws IllegalArgumentException {
+    public List<String> getProbeMarks(Double stackDiameter, Double portDepth, int numPoints) throws IllegalArgumentException {
         int pointsPerPort = numPoints/2;
         if(null == portDepth) { portDepth = 0d; }
         if (null == pointPercents.get(pointsPerPort)){
             throw new IllegalArgumentException("Invalid Number of Traverse Points Provided");
         }
-        List<Double> points = new ArrayList<>();
+        List<String> points = new ArrayList<>();
         for (int i = 0; i < pointsPerPort; i++) {
             double distanceInStack = getPointLocation(pointPercents.get(pointsPerPort).get(i), stackDiameter);
             points.add(to2Decimals(distanceInStack + portDepth));
@@ -42,13 +42,8 @@ public class StackCalcs {
         return (percent/100) * stackDiameter;
     }
 
-    private Double to2Decimals(Double d) {
-        DecimalFormat df = new DecimalFormat("0.00");
-        String format = df.format(d);
-        try {
-            return (Double)df.parse(format);
-        } catch (ParseException e) {
-            return d;
-        }
+    private String to2Decimals(Double d) {
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        return formatter.format(d);
     }
 }

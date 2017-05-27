@@ -40,7 +40,7 @@ import 'rxjs/add/observable/throw';
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="serviceError">
                     Valid Traverse Points are: 4,8,12,16,20,24.
-                    {{serviceError}}
+                    <p *ngIf="debugMode">{{serviceError}}</p>
                 </div>
                 
             </div>
@@ -54,7 +54,8 @@ export class StackAppComponent {
         numberOfPoints: null,
     };
     completeInput: boolean;
-    serviceError: String = 'hey';
+    serviceError: String = '';
+    debugMode: boolean;
     traversePoints: number[] = [];
 
     traverseApiUrl = 'api/pointCalcs';
@@ -66,26 +67,24 @@ export class StackAppComponent {
             && this.traverseInputs.portDepth >= 0
             && this.traverseInputs.numberOfPoints > 0 ) {
             this.completeInput = true;
-            this.getPoints(this.traverseInputs).then((points) => this.traversePoints = points, (error) => this.serviceError = error);
+            this.getPoints(this.traverseInputs).subscribe((points) => { this.traversePoints = points; this.serviceError = ''; }, (error) => this.serviceError = error);
         } else {
             this.completeInput = false;
         }
     }
 
     // .then((response) => response.json().data as number[])
-    getPoints(traverseInputs: TraverseInputs): Promise<number[]> {
+    getPoints(traverseInputs: TraverseInputs): Observable<number[]> {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options = new RequestOptions({ headers });
         this.traversePoints = [];
         return this.http.post(this.traverseApiUrl, traverseInputs, options)
-            .toPromise()
-            .then(this.extractData)
+            .map(this.extractData)
             .catch(this.handleError);
     };
 
     private extractData(res: Response) {
         const body = res.json();
-        this.serviceError = '';
         return body || { };
     }
 
@@ -100,7 +99,7 @@ export class StackAppComponent {
             errMsg = error.message ? error.message : error.toString();
         }
 
-        return Promise.reject(errMsg);
+        return Observable.throw(errMsg);
     }
 
 }

@@ -37,13 +37,15 @@ public class StackCalcsTest {
 
     @Test
     public void createGetProbeMarkings() {
-        List expectedList = Arrays.asList(14.6, 85.4);
+        List<String> expectedList = Arrays.asList("14.60", "85.40");
 
-        assertTrue(expectedList.equals(testObj.getProbeMarks(100d, 0d, 4)));
+        List<String> probeMarks = testObj.getProbeMarks(100d, 0d, 4);
+        assertTrue(expectedList.equals(probeMarks));
 
-        expectedList = Arrays.asList(6.7/2+4, 25.0/2+4, 75.0/2+4, 93.3/2+4);
+        expectedList = Arrays.asList("7.35", "16.50", "41.50", "50.65");
 
-        assertTrue(expectedList.equals(testObj.getProbeMarks(50d, 4d, 8)));
+        List<String> probeMarks1 = testObj.getProbeMarks(50d, 4d, 8);
+        assertTrue(expectedList.equals(probeMarks1));
     }
 
     @Test(expected = IllegalArgumentException.class)
